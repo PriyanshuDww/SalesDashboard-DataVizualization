@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Dashboard</title>
+    <link rel="stylesheet" href="styles/main.css" />
+  </head>
+
+  <body>
+    <!-- ✅ Zoom wrapper starts here -->
+    <div id="zoom-wrapper">
+      <div id="container">
+        <!-- Navbar Section -->
+        <div id="navbar">
+          <div class="navbar-heading">
+            <h2>Sales Performance <span class="divider">|</span> Dashboard</h2>
+          </div>
+
+          <div class="navbar-filters">
+            <select id="countryDropdown"></select>
+            <select id="productLineDropdown"></select>
+            <select id="customerDropdown"></select>
+            <select id="monthFilter" title="Select Month"></select>
+
+            <button id="clearFilters">Clear</button>
+          </div>
+        </div>
+
+        <!-- === Product Analysis Section === -->
+        <h2 class="section-heading">Product Analysis</h2>
+
+        <div id="row1">
+          <div id="kpi-cards" class="kpi-container">
+            <div class="kpi-card">
+              <div class="kpi-title">Total Sales</div>
+              <div class="kpi-value" id="kpi-sales">$0</div>
+              <svg id="kpi-sales-trend"></svg>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title">Total Quantity Ordered</div>
+              <div class="kpi-value" id="kpi-quantity">0</div>
+              <svg id="kpi-quantity-trend"></svg>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-title">Average Unit Rate</div>
+              <div class="kpi-value" id="kpi-rate">$0</div>
+              <svg id="kpi-rate-trend"></svg>
+            </div>
+          </div>
+          <div id="horizontal-barchart"></div>
+        </div>
+
+        <div id="row2">
+          <div id="sales-heatmap-table"></div>
+          <div id="donutchart"></div>
+        </div>
+
+        <!-- === Geo & Time Analysis Section === -->
+        <h2 class="section-heading">Geographical & Temporal Analysis</h2>
+
+        <div id="row3">
+          <div id="linechart"></div>
+        </div>
+
+        <div
+          id="row4"
+          style="margin-bottom: 50px; height: 700px; grid-template-columns: 1.5fr 1fr;"
+        >
+          <div id="map"></div>
+          <div id="sunburst-wrapper">
+            <h3 class="chart-title">
+              Top 3 Product Lines in Top 6 Countries
+            </h3>
+            <div id="sunburst"></div>
+            <div id="sunburst-legend"></div>
+          </div>
+        </div>
+
+        <!-- === Customer Segmentation Section === -->
+        <h2 class="section-heading">Customer Segmentation</h2>
+
+        <div id="row5">
+          <div id="bubblechart"></div>
+        </div>
+
+        <h2 class="section-heading">Top vs Bottom Country Performance</h2>
+<div id="row6" style="display: flex; justify-content: space-between; gap: 40px; height: 500px;">
+  <div id="top-countries" style="flex: 1; background-color: #1b1f24; padding: 20px; border-radius: 10px;"></div>
+  <div id="bottom-countries" style="flex: 1; background-color: #1b1f24; padding: 20px; border-radius: 10px;"></div>
+</div>
+       
+      </div> <!-- End of #container -->
+    </div> <!-- End of #zoom-wrapper -->
+    <script type="module">
+      import { hexbin as d3Hexbin } from 'https://cdn.jsdelivr.net/npm/d3-hexbin@0.2.2/build/d3-hexbin.min.js';
+      window.d3Hexbin = d3Hexbin; // This makes it globally accessible
+    </script>
+    <!-- D3 & TopoJSON Libraries -->
+    <script src="./libs/d3/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <script type="module" src="scripts/main.js"></script>
+<!-- In your HTML file's head section -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3-hexbin@0.2.2/dist/d3-hexbin.min.js"></script>
+
+
+    <div
+      id="heatmap-tooltip"
+      style="position:absolute; display:none; pointer-events:none; background:#1e1e1e; color:white; padding:12px 16px; border-radius:8px; font-size:18px; box-shadow:0 4px 10px rgba(0,0,0,0.5); z-index:1000;"
+    ></div>
+  </body>
+</html>

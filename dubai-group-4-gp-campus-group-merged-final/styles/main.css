@@ -1,0 +1,492 @@
+
+
+/* === Base Reset === */
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background-color: #12181f;
+  min-height: 100vh; /* Ensures body takes at least full viewport height */
+}
+
+svg text {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  fill: white;
+  font-size: 12px;
+}
+
+h2 {
+  color: white;
+  margin-top: 40px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #3b82f6;
+}
+
+/* === Main Grid Layout === */
+#container {
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto;
+  gap: 20px;
+  min-height: calc(100vh - 40px); /* Viewport height minus your body padding */
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+/* === Top Navbar Styling === */
+#navbar {
+  position: sticky !important;
+  top: 0;
+  z-index: 1000;
+  background-color: #23252B;
+  padding: 10px 20px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.navbar-heading h2 {
+  color: white;
+  font-weight: bold;
+  font-size: 60px;
+}
+
+.navbar-heading h4 {
+  color: white;
+  font-size: 22px;
+}
+
+.navbar-filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex: 1;
+}
+
+/* === Improved Dropdowns & Filter Styling === */
+#navbar select {
+  padding: 18px 28px;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: white;
+  border: 1px solid #3b82f6;
+  font-size: 36px;
+  min-width: 240px;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+#navbar select:focus {
+  outline: none;
+  border-color: #90cdf4;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+/* === Month Multi-Select === */
+#monthFilter {
+  min-width: 180px;
+  max-height: 120px;
+  overflow-y: auto;
+  background-color: #1e1e1e;
+  border: 1px solid #3b82f6;
+  border-radius: 8px;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+#monthFilter option {
+  padding: 6px;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+#monthFilter option:checked {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* === Clear Button Styling (Consistent) === */
+#clearFilters {
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: white;
+  padding: 18px 28px;
+  font-size: 36px;
+  min-width: 240px;
+  font-weight: bold;
+  border: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+#clearFilters:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+/* === KPI and Chart Layout === */
+#row1 {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+
+.kpi-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 90%;
+}
+
+.kpi-card {
+  background-color: #2D2F36;
+  border-left: 4px solid #3b82f6;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.kpi-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+  transform: scale(1.05);
+}
+
+.kpi-title {
+  font-size: 36px;
+  color: white;
+  margin-bottom: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.kpi-value {
+  font-size: 98px;
+  font-weight: bold;
+  color: #3b82f6;
+}
+
+#horizontal-barchart {
+  background-color: #23252B;
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  min-height: 500px;  /* ✅ FIX: ensures it gets enough height */
+  color: white;
+  box-sizing: border-box;
+}
+
+
+#row2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  height: 600px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #1f2a36;
+}
+
+/* === Heatmap Table === */
+#sales-heatmap-table {
+  height: 100%;
+  overflow: auto;
+  background-color: #23252B;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#sales-heatmap-table table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  background-color: #23252B;
+  border: 1px solid #444;
+  font-size: 18px;
+  color: white;
+}
+
+#sales-heatmap-table th {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px;
+  text-transform: uppercase;
+  font-size: 20px;
+  border: 1px solid #444;
+}
+
+#sales-heatmap-table th,
+#sales-heatmap-table td {
+  padding: 12px;
+  text-align: right;
+  border: 1px solid #444;
+}
+
+#sales-heatmap-table td {
+  background-color: #2d2f36;
+}
+
+#sales-heatmap-table td:first-child {
+  text-align: left;
+  font-weight: bold;
+}
+
+#sales-heatmap-table tr:hover {
+  background-color: #3a3a3a;
+}
+
+/* === Donut Chart === */
+#donutchart {
+  background: #23252B;
+  border-radius: 12px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid #444;
+}
+
+/* === Chart Containers === */
+#container > div > div,
+#linechart,
+#bubblechart,
+#map,
+#sunburst {
+  width: 100%;
+  background-color: #1b1f24;
+  height: 100%;
+}
+
+/* Ensure map container has dimensions */
+/* Map Container */
+/* Add to your CSS */
+#map {
+  width: 100%;
+  height: 600px;
+  background: #1b1f24;
+  border: 1px solid #3b82f6; /* Visual boundary */
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+
+/* Ensure tooltips stay on top and are visible */
+.map-tooltip {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1000;
+  font-size: 14px !important; /* Force override */
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  border-radius: 4px;
+  transform: translate(10px, -50%); /* Adjust as needed */
+}
+
+/* Fix for bubble interactions */
+.country-bubble {
+  pointer-events: all;
+  stroke-opacity:0;
+  stroke-width: 5px; /* Larger invisible hit area */
+}
+
+#map svg {
+  overflow: visible;
+}
+
+#row3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  background: #23252B;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  color: white;
+}
+
+#linechart {
+  width: 100%;
+  height: 100%;
+}
+
+#row4 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  height: 600px;
+}
+
+#row5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  background-color: #23252B;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+#row6 {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  height: 500px;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #1f2a36;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+#top-countries,
+#bottom-countries {
+  flex: 1;
+  background-color: #1b1f24;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#bubblechart {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+
+p,
+ul,
+li,
+span,
+ol {
+  font-size: 18px;
+  line-height: 1.6;
+  color: white;
+}
+
+.narrative {
+  font-size: 28px;
+  line-height: 1.9;
+  color: #f1f1f1;
+  max-width: none;
+  text-align: left;
+  margin: 30px 0;
+  padding: 0 20px;
+  white-space: normal;
+}
+
+.narrative-list,
+.narrative-list li {
+  font-size: 28px !important;
+  line-height: 1.9;
+  color: #f1f1f1;
+  margin: 30px 0;
+  padding-left: 40px;
+  list-style-position: outside;
+}
+
+.narrative-list-container {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* === Sunburst Wrapper & Legend === */
+#sunburst-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px;
+  background-color: #1b1f24;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chart-title {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#sunburst {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sunburst-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px;
+  font-size: 12px;
+  color: white;
+}
+
+.section-heading {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 800;
+  margin-top: 30px;
+  color: white;
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.map-tooltip {
+  font-size: 22px;
+  padding: 18px 24px;
+  background-color: #1e1e1e;
+  color: #fff;
+  border-radius: 10px;
+  line-height: 1.6;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+/* ✅ ZOOM WRAPPER ADDED */
+#zoom-wrapper {
+  transform: scale(0.33);
+  transform-origin: top left;
+  width: 300%;
+  height: 300%;
+}
+
